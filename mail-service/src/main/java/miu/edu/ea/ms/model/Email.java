@@ -8,10 +8,11 @@ public class Email {
     private String body;
     private String subject;
 
-    public Email(String address, String body, String subject) {
+    public Email(String address, String subject, String body ) {
         this.address = address;
-        this.body = body;
         this.subject = subject;
+        this.body = body;
+
     }
 
     public Email() {
