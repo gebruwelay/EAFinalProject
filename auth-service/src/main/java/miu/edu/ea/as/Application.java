@@ -1,13 +1,13 @@
-package miu.edu.ea.ms;
+package miu.edu.ea.as;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MailServiceApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(MailServiceApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }

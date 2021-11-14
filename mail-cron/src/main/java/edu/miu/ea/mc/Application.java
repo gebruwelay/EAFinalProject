@@ -1,13 +1,13 @@
-package miu.edu.ea.cs;
+package edu.miu.ea.mc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CommonServiceApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(CommonServiceApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }

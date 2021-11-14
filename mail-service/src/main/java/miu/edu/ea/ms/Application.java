@@ -1,13 +1,13 @@
-package edu.miu.ea.mc;
+package miu.edu.ea.ms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MailCronApplication {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(MailCronApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }
