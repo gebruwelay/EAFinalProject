@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: mail-cron
+
+server:
+  port:
+    8082
