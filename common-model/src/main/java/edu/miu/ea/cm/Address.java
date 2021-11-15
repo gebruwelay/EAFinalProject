@@ -16,7 +16,7 @@ public class Address {
     @Id
     @GeneratedValue
     private long id;
-    @NonNull @NotEmpty
+    @NonNull
     @Size(min=2,max = 20)
     private String street;
     @NonNull

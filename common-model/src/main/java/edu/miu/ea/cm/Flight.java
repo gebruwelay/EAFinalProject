@@ -13,25 +13,48 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+
 public class Flight {
+    //adding maximum reservation for every instance flight
     @Id
-    @GeneratedValue
-    private Long id;
-    private String number;
-    private Integer capacity;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String flightNumber;
+    private int capacity;
+    @Transient
+    private int availableSeat;
     private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@Fetch(FetchMode.SUBSELECT)
+    private double price;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Airline airline;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private Airport arrivalAirport;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private Airport departureAirport;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@Fetch(FetchMode.SUBSELECT)
-    private Airport origin;
+    //add available seat in the counstructor
+    public Flight(String flightNumber, int capacity, LocalDateTime departureTime, LocalDateTime arrivalTime, double price,
+                  Airline airline, Airport arrivalAirport, Airport departureAirport) {
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    //@Fetch(FetchMode.SUBSELECT)
-    private Airport destination;
+        this.flightNumber = flightNumber;
+        this.capacity = capacity;
+        this.availableSeat = capacity;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+        this.price = price;
+        this.airline = airline;
+        this.arrivalAirport = arrivalAirport;
+        this.departureAirport = departureAirport;
+    }
+
+    //@Override
+    public int compareTo(Flight o) {
+        if (getDepartureTime() == null || o.getDepartureTime() == null) {
+            return 0;
+        }
+        return getDepartureTime().compareTo(o.getDepartureTime());
+    }
+
+
 }
