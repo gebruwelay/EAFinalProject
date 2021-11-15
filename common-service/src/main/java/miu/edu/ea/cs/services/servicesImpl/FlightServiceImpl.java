@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 @Transactional
 public class FlightServiceImpl implements FlightService {
@@ -26,35 +25,24 @@ public class FlightServiceImpl implements FlightService {
     @Autowired
     private AirportService airportService;
 
-
-
     public List<Flight> allFlights() {
         return repository.findAll();
     }
 
-
     public Flight saveFlight(Flight flight) {
         Flight flight1= new Flight();
-        System.out.println("dto recived"+ flight);
+
         if(flight!=null) {
 
-            System.out.println("1"+airlineService.findByAirlineCode(flight.getAirlineCode()));
-            Airline airline = (Airline) airlineService.findByAirlineCode(flight.getAirlineCode());
+            System.out.println("1"+airlineService.findByAirlineCode(flight.getAirline().getCode()));
+            Airline airline = (Airline) airlineService.findByAirlineCode(flight.getAirline().getCode());
             System.out.println("2");
-            Optional<Airport> arrivalAirport = airportService.oneAirport(flight.getArrivalAirport());
+            Optional<Airport> arrivalAirport = airportService.oneAirport(flight.getArrivalAirport().getId());
             System.out.println("3");
             Optional<Airport> departureAirport = airportService.oneAirport(flight.getDepartureAirport().getId());
             System.out.println("4");
 
-            System.out.println("1"+airlineService.findByAirlineCode(flight.getAirlineCode()));
-            Airline airline = (Airline) airlineService.findByAirlineCode(flight.getAirlineCode());
-            System.out.println("2");
-            Optional<Airport> arrivalAirport = airportService.oneAirport(flight.getArrivalAirport());
-            System.out.println("3");
-            Optional<Airport> departureAirport = airportService.oneAirport(flight.getDepartureAirport());
-            System.out.println("4");
-
-            if (arrivalAirport != null && departureAirport != null && airline!=null) {
+            if (arrivalAirport.isPresent() && departureAirport.isPresent() && airline!=null) {
 
                 flight.setCapacity(flight.getCapacity());
                 flight.setPrice(flight.getPrice());
@@ -82,10 +70,9 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public Flight editFlight(int id,Flight flight) {
+    public Flight editFlight(long id, Flight flight) {
 
         Flight flight2= getFlightById(id);
-
         if (flight2 != null) {
             flight2.setFlightNumber(flight.getFlightNumber());
             flight2.setAirline(flight.getAirline());
@@ -103,26 +90,25 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public Flight updateFlight(Flight fligh, int id) {
+    public Flight updateFlight(Flight flightNew, long id) {
         Flight flight= getFlightById(id);
 
-        System.out.println("dto recived"+ fligh);
-        if(fligh!=null && flight!=null) {
-            System.out.println("1"+airlineService.findByAirlineCode(fligh.getAirlineCode()));
-            Airline airline = (Airline) airlineService.findByAirlineCode(fligh.getAirlineCode());
+        if(flight!=null && flight!=null) {
+            System.out.println("1"+airlineService.findByAirlineCode(flight.getAirline().getCode()));
+            Airline airline = (Airline) airlineService.findByAirlineCode(flight.getAirline().getCode());
             System.out.println("2");
-            Optional<Airport> arrivalAirport = airportService.oneAirport(fligh.getArrivalAirport());
+            Optional<Airport> arrivalAirport = airportService.oneAirport(flight.getArrivalAirport().getId());
             System.out.println("3");
-            Optional<Airport> departureAirport = airportService.oneAirport(fligh.getDepartureAirport());
+            Optional<Airport> departureAirport = airportService.oneAirport(flight.getDepartureAirport().getId());
             System.out.println("4");
-            if (arrivalAirport != null && departureAirport != null && airline!=null) {
+            if (arrivalAirport.isPresent() && departureAirport.isPresent() && airline!=null) {
 
-                flight.setCapacity(fligh.getCapacity());
-                flight.setPrice(fligh.getPrice());
-                flight.setFlightNumber(fligh.getFlightNumber());
-                flight.setAvailableSeat(fligh.getAvailableSeat());
-                flight.setDepartureTime(fligh.getDepartureTime());
-                flight.setArrivalTime(fligh.getArrivalTime());
+                flight.setCapacity(flightNew.getCapacity());
+                flight.setPrice(flightNew.getPrice());
+                flight.setFlightNumber(flightNew.getFlightNumber());
+                flight.setAvailableSeat(flightNew.getAvailableSeat());
+                flight.setDepartureTime(flightNew.getDepartureTime());
+                flight.setArrivalTime(flightNew.getArrivalTime());
                 flight.setDepartureAirport(departureAirport.get());
                 flight.setArrivalAirport(arrivalAirport.get());
                 flight.setAirline(airline);
@@ -138,18 +124,17 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public Flight getFlightById (int flightid) {
+    public Flight getFlightById (long flightid) {
         return  repository.findById(flightid).orElse(null);
     }
 
     @Override
-    public void deleteFlight(int fid) {
+    public void deleteFlight(long fid) {
         repository.deleteById(fid);
     }
 
-
     @Override
-    public void deleteFlightById(int fid) {
+    public void deleteFlightById(long fid) {
         repository.deleteFlightById(fid);
     }
 }

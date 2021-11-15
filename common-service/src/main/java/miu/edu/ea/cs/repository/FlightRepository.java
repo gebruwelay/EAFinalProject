@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 @Repository
 @Transactional
-public interface FlightRepository extends JpaRepository<Flight,Integer> {
+public interface FlightRepository extends JpaRepository<Flight, Long> {
 
     @Query("select f from Flight f where f.departureAirport.code=:departureAirport and f.arrivalAirport.code=:arrivalAirport and f.departureTime=:departureDate")
     List<Flight> searchFlightbyDepartureandDestination(LocalDateTime departureDate, String departureAirport, String arrivalAirport);
@@ -20,6 +20,6 @@ public interface FlightRepository extends JpaRepository<Flight,Integer> {
     List<Flight> searchByTime(LocalDateTime departureDate, String departureAirport);
 
     @Query("delete from Flight f where f.id=:id")
-    void deleteFlightById(int id);
+    void deleteFlightById(long id);
 
 }

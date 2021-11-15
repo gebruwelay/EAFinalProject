@@ -8,13 +8,13 @@ import java.util.Optional;
 public interface AirportService {
     public List<Airport> allAirports();
 
-    public Optional<Airport> oneAirport(int id);
+    public Optional<Airport> oneAirport(long id);
 
-    public void deleteAirport(int id);
+    public void deleteAirport(long id);
 
     public Airport saveAirport(Airport airport);
 
-    public Airport updateAirport(int id, Airport airport);
+    public Airport updateAirport(long id, Airport airport);
 
 
 }

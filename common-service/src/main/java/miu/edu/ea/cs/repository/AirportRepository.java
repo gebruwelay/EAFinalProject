@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public interface AirportRepository extends JpaRepository<Airport,Integer> {
+public interface AirportRepository extends JpaRepository<Airport, Long> {
     @Query("select distinct a from Airline a join Flight  f where f.departureAirport.code =:airportcode")
     List<Airport> findByAiportCode(String airportcode);
 

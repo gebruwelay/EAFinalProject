@@ -11,17 +11,17 @@ public interface FlightService {
     Flight saveFlight(Flight flight);
 
     List<Flight> searchFlightbyDepartureandDestination(LocalDateTime departureDate, String departureAirport, String destinationAirport);
-    //TODO
-    Flight editFlight(int id,Flight flight);
+
+    Flight editFlight(long id,Flight flight);
 
 
-    void deleteFlight(int fid);
+    void deleteFlight(long fid);
 
-    void deleteFlightById(int fid);
+    void deleteFlightById(long fid);
 
-    Flight getFlightById(int flightid);
+    Flight getFlightById(long flightid);
 
-    public Flight updateFlight(Flight flight, int id);
+    public Flight updateFlight(Flight flight, long id);
 
 
 }

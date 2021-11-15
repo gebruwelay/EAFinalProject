@@ -25,18 +25,18 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
-    public Optional<Airport> oneAirport(int id) {
+    public Optional<Airport> oneAirport(long id) {
         return repository.findById(id);
     }
 
     @Override
-    public void deleteAirport(int id) {
+    public void deleteAirport(long id) {
         repository.deleteById(id);
     }
 
 
     @Override
-    public Airport updateAirport(int id, Airport airport) {
+    public Airport updateAirport(long id, Airport airport) {
         Optional<Airport> airport2 = oneAirport(id);
         Airport ap = airport2.orElse(null);
         ap.setAddress(airport.getAddress());
