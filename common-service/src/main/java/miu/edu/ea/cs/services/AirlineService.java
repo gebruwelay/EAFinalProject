@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AirlineService {
+
     Page<Airline> findAllAirlines(Pageable pageable);
     Airline saveAirline(Airline airline);
     Airline findByAirlineCode(String airlinecode);
@@ -16,4 +17,5 @@ public interface AirlineService {
     Optional<Airline> findById(long id);
     Airline updateAirline(Airline newAirline,int id);
     void deleteAirline(long id);
+
 }

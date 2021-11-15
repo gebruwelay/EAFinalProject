@@ -11,8 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class Application {
 
     public static void main(String[] args) {
-        Airport a = new Airport();
-        a.test();
+
         SpringApplication.run(Application.class, args);
     }
 

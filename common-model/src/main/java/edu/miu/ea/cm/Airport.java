@@ -27,8 +27,5 @@ public class Airport {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    public void test(){
-        System.out.println("I am in the airport modelo");
-    }
 
 }
