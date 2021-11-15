@@ -24,7 +24,9 @@ public class Ticket {
     @Column(unique = true)
     @Digits(fraction = 0, integer = 20)
     @NotEmpty
-    private String number;
+    private String ticketNumber;
+    private String flightId;
+    private Long passengerId;
     @NonNull
     @Future
     private LocalDate flightDate;

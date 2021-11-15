@@ -44,9 +44,9 @@ public class Reservation implements Serializable {
    // @Fetch(FetchMode.SUBSELECT)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     //@Fetch(FetchMode.SUBSELECT)
-    private ActiveFlight activeFlight;
+    private List<ActiveFlight> activeFlights;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     //@Fetch(FetchMode.SUBSELECT)
