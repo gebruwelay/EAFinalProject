@@ -31,9 +31,7 @@ public class FlightServiceImpl implements FlightService {
 
     public Flight saveFlight(Flight flight) {
         Flight flight1= new Flight();
-
         if(flight!=null) {
-
             System.out.println("1"+airlineService.findByAirlineCode(flight.getAirline().getCode()));
             Airline airline = (Airline) airlineService.findByAirlineCode(flight.getAirline().getCode());
             System.out.println("2");
@@ -44,21 +42,18 @@ public class FlightServiceImpl implements FlightService {
 
             if (arrivalAirport.isPresent() && departureAirport.isPresent() && airline!=null) {
 
-                flight.setCapacity(flight.getCapacity());
-                flight.setPrice(flight.getPrice());
-                flight.setFlightNumber(flight.getFlightNumber());
-                flight.setAvailableSeat(flight.getAvailableSeat());
-                flight.setDepartureTime(flight.getDepartureTime());
-                flight.setArrivalTime(flight.getArrivalTime());
-                flight.setDepartureAirport(departureAirport.get());
-                flight.setArrivalAirport(arrivalAirport.get());
-                flight.setAirline(airline);
-
+                flight1.setCapacity(flight.getCapacity());
+                flight1.setPrice(flight.getPrice());
+                flight1.setFlightNumber(flight.getFlightNumber());
+                flight1.setAvailableSeat(flight.getAvailableSeat());
+                flight1.setDepartureTime(flight.getDepartureTime());
+                flight1.setArrivalTime(flight.getArrivalTime());
+                flight1.setDepartureAirport(departureAirport.get());
+                flight1.setArrivalAirport(arrivalAirport.get());
+                flight1.setAirline(airline);
                 System.out.println("flight sent is"+ flight);
-
-                return repository.save(flight);
+                return repository.save(flight1);
             }
-            //todo need airport by code now it oworks by ID
 
         }
         return null;
