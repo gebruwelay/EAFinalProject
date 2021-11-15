@@ -1,6 +1,11 @@
 package miu.edu.ea.cs.repository;
 
+import edu.miu.ea.cm.Passenger;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-public interface PassengerRepository extends JpaRepository {
+@Repository
+@Transactional
+public interface PassengerRepository extends JpaRepository<Passenger, Long>  {
 }
