@@ -11,8 +11,8 @@
     <groupId>edu.miu.ea</groupId>
     <artifactId>service-registry</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>service-registry</name>
-    <description>service-registry</description>
+    <name>services-registry</name>
+    <description>services-registry</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>

@@ -11,8 +11,8 @@
     <groupId>miu.edu.ea</groupId>
     <artifactId>reservation-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>reservation-service</name>
-    <description>reservation-service</description>
+    <name>reservation-services</name>
+    <description>reservation-services</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>

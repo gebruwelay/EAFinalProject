@@ -11,8 +11,8 @@
     <groupId>miu.edu.ea</groupId>
     <artifactId>mail-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mail-service</name>
-    <description>mail-service</description>
+    <name>mail-services</name>
+    <description>mail-services</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
