@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Data
@@ -17,7 +20,7 @@ public class Ticket {
     @Id
     @GeneratedValue
     private long id;
-    @NotNull
+    @NonNull
     @Column(unique = true)
     @Digits(fraction = 0, integer = 20)
     @NotEmpty

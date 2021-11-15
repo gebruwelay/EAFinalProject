@@ -1,9 +1,10 @@
 package edu.miu.ea.cm;
 
 import lombok.*;
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 

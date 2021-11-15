@@ -21,6 +21,6 @@ public class ActiveFlight {
     private Double  price;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @Fetch(FetchMode.SUBSELECT)
+   // @Fetch(FetchMode.SUBSELECT)
     private Flight flight;
 }
