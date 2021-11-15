@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 public class Listener {
     @Autowired
     EmailService emailService;
-    @KafkaListener(topics = "email-new",groupId = "group_id")
+    @KafkaListener(topics = "emailTopic",groupId = "group_id")
     public void consume(String message) {
         System.out.println("Consumed message: " + message);
     }
 
-    @KafkaListener(topics = "email-new",groupId = "group_json", containerFactory = "emailKafkaListenerFactory")
+    @KafkaListener(topics = "emailTopic",groupId = "group_json", containerFactory = "emailKafkaListenerFactory")
     public void consume(Email email) {
         System.out.println("Consumed message: " + email);
         emailService.sendEmail(email);

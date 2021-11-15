@@ -1,4 +1,4 @@
-package miu.edu.ea.ms.model;
+package edu.miu.ea.mc.model;
 
 import lombok.Data;
 
@@ -8,14 +8,13 @@ public class Email {
     private String body;
     private String subject;
 
-    public Email() {
-    }
     public Email(String address,String body, String subject ) {
         this.address = address;
         this.body = body;
         this.subject = subject;
+    }
 
-
+    public Email() {
     }
 
     @Override
