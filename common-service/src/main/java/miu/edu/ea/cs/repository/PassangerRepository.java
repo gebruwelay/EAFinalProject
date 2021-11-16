@@ -4,10 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import miu.edu.ea.cs.model.Ticket;
+import miu.edu.ea.cs.model.Passenger;
 
 @Repository
 @Transactional
-public interface TicketRepository extends JpaRepository<Ticket, Integer> {
+public interface PassangerRepository extends JpaRepository<Passenger, Integer> {
 
 }
