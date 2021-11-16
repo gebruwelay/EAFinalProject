@@ -29,14 +29,13 @@ public class AirlineServiceImpl implements AirlineService {
     }
 
     @Override
-    public Airline findByAirlineCode(String airlinecode) {
-        return airlineRepository.findByAirlineCode(airlinecode);
+    public Airline findByAirlineCode(String airlineCode) {
+        return airlineRepository.findByAirlineCode(airlineCode);
     }
 
     @Override
-    public List<Airline> findByAirportCode(String airportcode) {
-        return null;
-                //airlineRepository.findByAiportCode(airportcode);
+    public List<Airline> findByAirportCode(String airportCode) {
+                return airlineRepository.findByAirportCode(airportCode);
     }
 
     @Override
@@ -45,7 +44,7 @@ public class AirlineServiceImpl implements AirlineService {
     }
 
     @Override
-    public Airline updateAirline(Airline airline, int id) {
+    public Airline updateAirline(Airline airline, long id) {
         Optional<Airline> existingAirline = findById(id);
         Airline airline2 = existingAirline.orElse(null);
         if (airline2 != null) {

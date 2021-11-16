@@ -12,10 +12,10 @@ public interface AirlineService {
 
     Page<Airline> findAllAirlines(Pageable pageable);
     Airline saveAirline(Airline airline);
-    Airline findByAirlineCode(String airlinecode);
-    List<Airline> findByAirportCode(String airportcode);
+    Airline findByAirlineCode(String airlineCode);
+    List<Airline> findByAirportCode(String airportCode);
     Optional<Airline> findById(long id);
-    Airline updateAirline(Airline newAirline,int id);
+    Airline updateAirline(Airline newAirline,long id);
     void deleteAirline(long id);
 
 }
