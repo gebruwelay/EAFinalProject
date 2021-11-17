@@ -46,12 +46,12 @@ public class FlightreservationApplication {
             userService.saveUser(new User( "agent", "123", true, new ArrayList<>()));
 
 
-            userService.addRole("john", "Role_User");
+            userService.addRole("john", "Role_Customer");
             userService.addRole("smith", "Role_Agent");
             userService.addRole("jim", "Role_Admin");
             userService.addRole("jim", "Role_Agent");
             userService.addRole("admin", "Role_Admin");
-            userService.addRole("admin", "Role_User");
+            userService.addRole("admin", "Role_Customer");
             userService.addRole("agent", "Role_Agent");
         };
     }
