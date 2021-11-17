@@ -28,7 +28,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-    private User loggedinUser;
+    private User loggedInUser;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -37,9 +37,8 @@ public class UserServiceImp implements UserService, UserDetailsService {
             log.error("User not found in database");
             throw new UsernameNotFoundException("User not found in database");
         } else {
-            loggedinUser = user;
+            loggedInUser = user;
             log.info("User found in database: {}", username);
-
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
@@ -81,7 +80,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
 
     @Override
     public User getLoggedInUser() {
-        return loggedinUser;
+        return loggedInUser;
     }
 
     @Override
@@ -93,7 +92,6 @@ public class UserServiceImp implements UserService, UserDetailsService {
         }
         return  null;
     }
-
 }
 
 
