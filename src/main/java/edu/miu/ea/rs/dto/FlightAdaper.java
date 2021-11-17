@@ -1,5 +1,6 @@
 package edu.miu.ea.rs.dto;
 
+import edu.miu.ea.rs.model.Airport;
 import edu.miu.ea.rs.model.Flight;
 import edu.miu.ea.rs.service.AirlineService;
 
@@ -12,14 +13,7 @@ public class FlightAdaper {
     @Autowired
     AirlineService airlineService;
     public static Flight getFlight(FlightDTO flightDTO){
-//        Flight flight= new Flight();
-//        if(flightDTO!=null){
-//             Airline airline= airlineService.findByAiportCode(flightDTO.getAirlineCode());
-//
-//            Airport arrivalAirport;
-//
-//             Airport departureAirport;
-//        }
+ Airport departureAirport;
         return null;
 
     }

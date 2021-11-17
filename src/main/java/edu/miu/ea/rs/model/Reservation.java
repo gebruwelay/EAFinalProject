@@ -30,12 +30,6 @@ public class Reservation {
 			ArrayList<>();
     @ManyToOne( cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private User user;
-    
-   // /reservations/ body of list of flightIds POST
-    
-    // /flights/ body passanges
-    
-    //if there is no available seats for all the flight list are full then no reservation is allowed
 	public Reservation(String reservationCode, LocalDate reservationDate, ReservationStatus status,
 			List<Flight> flightList, Passenger passenger, User user) {
 		this.reservationCode = reservationCode;

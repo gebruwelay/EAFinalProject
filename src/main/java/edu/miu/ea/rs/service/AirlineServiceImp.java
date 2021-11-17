@@ -31,11 +31,6 @@ public class AirlineServiceImp implements AirlineService{
 		return airlineRepository.save(airline);
 	}
 
-//	public List<Airline> findByAirlineCode(String airportcode) {
-//		return repository.findByAiportCode(airportcode);
-//	}
-
-
 	public Airline findById(int id) {
 		return airlineRepository.findById(id).orElse(null);
 	}
@@ -59,17 +54,6 @@ public class AirlineServiceImp implements AirlineService{
 		airlineRepository.deleteById(id);
 	}
 
-//	@Override
-//	public Airline findByAirLineCode(String airlinecode) {
-//		return airlineRepository.findByAirlineCode(airlinecode);
-//	}
-
-//	@Override
-//	public List<Airport> findByAirportCode(String airportcode) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
 	@Override
 	public Airline findByAirlineCode(String airlinecode) {
 		return airlineRepository.findByAirlineCode(airlinecode);
@@ -80,15 +64,6 @@ public class AirlineServiceImp implements AirlineService{
 		return airlineRepository.findByAiportCode(airportcode);
 	}
 
-//	@Override
-//	public Airline findByAirLineCode(String airportcode) {
-//		return repository.findByAirlineCode(airportcode);
-//	}
-
-//	@Override
-//	public List<Airport> findByAirportCode(String airportcode) {
-//		return repository.findByAiportCode(airportcode);
-//	}
 
 
 }

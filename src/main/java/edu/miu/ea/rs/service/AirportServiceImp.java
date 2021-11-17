@@ -44,11 +44,5 @@ public class AirportServiceImp implements AirportService{
 		saveAirport(ap);
 		return airport;
 	}
-
-//	@Override
-//	public Airport findByName(String name) {
-//		return repository.findByName(name);
-//	}
-	
 	
 }

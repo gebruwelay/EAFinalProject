@@ -2,6 +2,8 @@ package edu.miu.ea.rs;
 
 import java.util.ArrayList;
 
+import edu.miu.ea.rs.model.Address;
+import edu.miu.ea.rs.model.Airport;
 import edu.miu.ea.rs.model.Role;
 import edu.miu.ea.rs.model.User;
 import edu.miu.ea.rs.service.UserService;
@@ -35,6 +37,7 @@ public class FlightreservationApplication {
     @Bean
     CommandLineRunner run (UserService userService){
         return args -> {
+
             userService.saveRole(new Role(null, "Role_Customer"));
             userService.saveRole(new Role(null, "Role_Agent"));
             userService.saveRole(new Role(null, "Role_Admin"));
@@ -54,5 +57,6 @@ public class FlightreservationApplication {
             userService.addRole("admin", "Role_User");
             userService.addRole("agent", "Role_Agent");
         };
+
     }
  }
