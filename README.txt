@@ -6,7 +6,7 @@ reservation-services: 8084
 services-registry: 8761
 
 ## Run Reservation Service
-docker run -it --net dev-network -e MYSQL_HOST=mysql8.0 faisalbegins/reservation-service
+docker run -it --net dev-network -e MYSQL_HOST=mysql8.0 -e KAFKA_HOST_PORT=localhost:9092 faisalbegins/reservation-service
 
 ## Run Mail Service
 docker run -it -e KAFKA_HOST_PORT='host.docker.internal:9092' -e KAFKA_TOPIC_GROUP='group_json' faisalbegins/mail-service

@@ -21,6 +21,9 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
 
 app:
+  kafka:
+    host:
+      ${KAFKA_HOST_PORT}
   security:
     secret: secret
     public-urls: >
