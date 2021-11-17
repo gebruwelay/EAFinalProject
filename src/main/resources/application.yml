@@ -5,6 +5,7 @@ spring:
     name: spring-boot-server
   datasource:
     url: jdbc:mysql://localhost:3306/flightreservation
+    initialization-mode: always
     username: root
     password: Okbit#2020
     driver-class-name: com.mysql.cj.jdbc.Driver

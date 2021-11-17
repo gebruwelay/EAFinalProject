@@ -94,7 +94,7 @@ public class ReservationController {
 		return reservationService.getOneReservationByPassanger(pid, rid);
 	}
 	
-	@RequestMapping(value = "/{id}/cancel", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{rid}/cancel", method = RequestMethod.DELETE)
 	public Reservation cancelReservation(@PathVariable int rid) {
 		return reservationService.cancelReservation(rid);
 	}
