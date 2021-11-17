@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +37,9 @@ public class ReservationController {
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('Role_Admin')")
-	public List<Reservation> allReservations(){
+	public List<Reservation> allReservations(Authentication authentication){
+		authentication.getName();
+		System.out.println("============================="+ authentication.getName());
 		return reservationService.allReservations();
 	}
 	

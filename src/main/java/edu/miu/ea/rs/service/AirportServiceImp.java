@@ -45,10 +45,4 @@ public class AirportServiceImp implements AirportService{
 		return airport;
 	}
 
-//	@Override
-//	public Airport findByName(String name) {
-//		return repository.findByName(name);
-//	}
-	
-	
 }

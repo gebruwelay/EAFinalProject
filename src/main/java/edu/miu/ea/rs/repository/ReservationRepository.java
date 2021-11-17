@@ -13,12 +13,6 @@ import edu.miu.ea.rs.model.Reservation;
 @Transactional
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
-	/*
-	 * 
-	 *  @Query("select f from Flight  f where f.departureAirport.name=:departureAirport and f.arrivalAirport.name=:arrivalAirport and f.departureTime=:departureDate")
-  List<Flight> searchFlightbyDepartureandDestination(LocalDateTime departureDate, String arrivalAirport, String departureAirport);
-
-	 */
 	@Query("select r from Reservation r where r.id=:rid and r.passenger.id=:pid")
 	Reservation getOneReservationByPassanger(int pid, int rid);
 	

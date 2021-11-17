@@ -13,7 +13,7 @@ public class FlightDTO {
     private String flightNumber;
     private int capacity;
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd H:m:s")
-    private LocalDateTime departureTime;
+        private LocalDateTime departureTime;
     private LocalDateTime arrivalTime;
     private double price;
     private int availableSeat;

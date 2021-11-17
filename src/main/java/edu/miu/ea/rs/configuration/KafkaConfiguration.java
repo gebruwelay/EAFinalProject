@@ -1,7 +1,7 @@
 package edu.miu.ea.rs.configuration;
 
 
-import edu.miu.ea.rs.dto.Email;
+import edu.miu.ea.rs.model.Email;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
