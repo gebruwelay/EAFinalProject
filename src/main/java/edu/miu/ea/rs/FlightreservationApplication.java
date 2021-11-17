@@ -2,6 +2,8 @@ package edu.miu.ea.rs;
 
 import java.util.ArrayList;
 
+import edu.miu.ea.rs.model.Address;
+import edu.miu.ea.rs.model.Airport;
 import edu.miu.ea.rs.model.Role;
 import edu.miu.ea.rs.model.User;
 import edu.miu.ea.rs.service.CronService;
@@ -37,24 +39,25 @@ public class FlightreservationApplication {
     @Bean
     CommandLineRunner run (UserService userService, CronService cronService){
         return args -> {
-            cronService.publish();
-//            userService.saveRole(new Role(null, "Role_Customer"));
-//            userService.saveRole(new Role(null, "Role_Agent"));
-//            userService.saveRole(new Role(null, "Role_Admin"));
-//
-//            userService.saveUser(new User( "john", "pass", true, new ArrayList<>()));
-//            userService.saveUser(new User("smith", "pass", true, new ArrayList<>()));
-//            userService.saveUser(new User( "jim", "pass", true, new ArrayList<>()));
-//            userService.saveUser(new User( "admin", "123", true, new ArrayList<>()));
-//            userService.saveUser(new User( "agent", "123", true, new ArrayList<>()));
-//
-//            userService.addRole("john", "Role_User");
-//            userService.addRole("smith", "Role_Agent");
-//            userService.addRole("jim", "Role_Admin");
-//            userService.addRole("jim", "Role_Agent");
-//            userService.addRole("admin", "Role_Admin");
-//            userService.addRole("admin", "Role_User");
-//            userService.addRole("agent", "Role_Agent");
+            userService.saveRole(new Role(null, "Role_Customer"));
+            userService.saveRole(new Role(null, "Role_Agent"));
+            userService.saveRole(new Role(null, "Role_Admin"));
+
+            userService.saveUser(new User( "john", "pass", true, new ArrayList<>()));
+            userService.saveUser(new User("smith", "pass", true, new ArrayList<>()));
+            userService.saveUser(new User( "jim", "pass", true, new ArrayList<>()));
+            userService.saveUser(new User( "admin", "123", true, new ArrayList<>()));
+            userService.saveUser(new User( "agent", "123", true, new ArrayList<>()));
+
+
+            userService.addRole("john", "Role_Customer");
+            userService.addRole("smith", "Role_Agent");
+            userService.addRole("jim", "Role_Admin");
+            userService.addRole("jim", "Role_Agent");
+            userService.addRole("admin", "Role_Admin");
+            userService.addRole("admin", "Role_Customer");
+            userService.addRole("agent", "Role_Agent");
         };
+
     }
  }

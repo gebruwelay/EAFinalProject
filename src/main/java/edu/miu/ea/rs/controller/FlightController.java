@@ -83,19 +83,6 @@ public class FlightController {
 	public Flight getFlightById(@PathVariable int id) {
 		return flightService.getFlightById(id);
 	}
-	
-	
-//	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-//	public ResponseEntity<?>editFlight(@PathVariable int id,@RequestBody Flight flight){
-//		Flight flight1= flightServiceImp.editFlight(id,flight);
-//		if(flight1!=null){
-//			return  new ResponseEntity<>(HttpStatus.OK);
-//		}
-//		else
-//			return  new ResponseEntity<>("Not valid flight to edit",HttpStatus.NOT_FOUND);
-//
-//
-//	}
 
 
 }

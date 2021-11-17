@@ -25,8 +25,4 @@ public class TicketController {
 	public List<Ticket> allTickets(){
 		return ticketService.allTickets();
 	}
-
-//	public Ticket saveTicket(Ticket ticket) {
-//		return ticketService.saveTicket(ticket);
-//	}
 }

@@ -12,7 +12,6 @@ public class Airport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-   // @Column(length = 3)
     private String code;
     private String name;
     @Embedded

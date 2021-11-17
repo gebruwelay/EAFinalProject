@@ -13,7 +13,6 @@ import lombok.Data;
 @Data
 public class ReservationDTO {
 
-	//private String reservationCode;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate reservedDate;
     private ReservationStatus status;

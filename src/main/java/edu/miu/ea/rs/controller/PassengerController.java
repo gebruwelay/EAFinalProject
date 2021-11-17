@@ -15,8 +15,8 @@ import edu.miu.ea.rs.model.Passenger;
 
 @RestController
 @Data
-@RequestMapping("/passangers")
-public class PassangerController {
+@RequestMapping("api/passengers")
+public class PassengerController {
 
 	@Autowired
 	private PassengerService passengerService;
@@ -40,8 +40,6 @@ public class PassangerController {
 	@PostMapping()
 	@PreAuthorize("hasAnyAuthority('Role_Admin')")
 	public ResponseEntity<Passenger> savePassanger(@RequestBody Passenger passanger) {
-		//URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/passangers/create").toUriString());
-		//return ResponseEntity.created(uri).body(passengerService.savePassanger(passanger));
 		return new ResponseEntity<>(passengerService.savePassanger(passanger), HttpStatus.OK);
 	}
 

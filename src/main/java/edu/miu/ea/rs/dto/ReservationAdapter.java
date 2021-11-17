@@ -68,13 +68,7 @@ public class ReservationAdapter {
 		Airport ap3 = new Airport("IAD","Dc", a1);
 		Airport ap4 = new Airport("BDR","Bahirdar", a1);
 		Airline al1 = new Airline("ET","Ethiopia", "one of the top 20 in the world");
-//		Flight f1 =  = new Flight("ET1", 20, LocalDateTime.of(2022, 10, 10, 10, 12), LocalDateTime.of(2022, 10, 10,10,10), 1000, al1,ap3,ap4);
-//		Flight f2 = new Flight("ET1", 20, LocalDateTime.of(2022, 10, 10, 9, 12), LocalDateTime.of(2022, 10, 10,10,10), 1000, al1,ap3,ap4);
-		//f1.setFlightNumber(flightIds.toString());
 		List<Flight> flightss = new ArrayList<>();
-//		flightss.add(f1);
-//		flightss.add(f2);
-		
 		for(int i:flightIds) {
 			Flight f= flightServices.getFlightById(i);
 			if(f!=null) {
@@ -87,7 +81,6 @@ public class ReservationAdapter {
 		System.out.println("f1==>"+flightss.toString());
 		
 		return flightss;
-		//return flightIds.stream().map(id -> flightServices.getFlightById(id).orElse(null)).collect(Collectors.toList());		
 	}
 	
 	public User getUserObject() {
@@ -95,9 +88,6 @@ public class ReservationAdapter {
 	}
 	
 	public Passenger getPassangetObject(int id) {
-//		Address a1 = new Address("a3","b3","c3","d3");
-//		Passenger p1 = new Passenger("AA","BB", LocalDate.of(1995, 10, 10),"email address", a1);
-//		return p1;
 		return passengerService.findById(id).orElse(null);
 	}
 	

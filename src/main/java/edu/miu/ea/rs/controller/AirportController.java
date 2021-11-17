@@ -21,7 +21,7 @@ import edu.miu.ea.rs.service.AirportService;
 
 @RestController
 @Data
-@RequestMapping("/api//airports")
+@RequestMapping("/api/airports")
 public class AirportController {
 
 	@Autowired
