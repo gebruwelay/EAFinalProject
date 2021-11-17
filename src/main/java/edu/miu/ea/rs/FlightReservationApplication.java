@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 
 @SpringBootApplication
@@ -24,26 +25,29 @@ public class FlightReservationApplication {
 	PasswordEncoder passwordEncoder() {return new BCryptPasswordEncoder();}
 
     @Bean
-    CommandLineRunner run (UserService userService){
+    CommandLineRunner run (UserService userService) {
         return args -> {
-            userService.saveRole(new Role(null, "Role_Customer"));
-            userService.saveRole(new Role(null, "Role_Agent"));
-            userService.saveRole(new Role(null, "Role_Admin"));
+            Optional<User> user = Optional.ofNullable(userService.getUser("john"));
+            if(!user.isPresent()) {
+                userService.saveRole(new Role(null, "Role_Customer"));
+                userService.saveRole(new Role(null, "Role_Agent"));
+                userService.saveRole(new Role(null, "Role_Admin"));
 
-            userService.saveUser(new User( "john", "pass", true, new ArrayList<>()));
-            userService.saveUser(new User("smith", "pass", true, new ArrayList<>()));
-            userService.saveUser(new User( "jim", "pass", true, new ArrayList<>()));
-            userService.saveUser(new User( "admin", "123", true, new ArrayList<>()));
-            userService.saveUser(new User( "agent", "123", true, new ArrayList<>()));
+                userService.saveUser(new User( "john", "pass", true, new ArrayList<>()));
+                userService.saveUser(new User("smith", "pass", true, new ArrayList<>()));
+                userService.saveUser(new User( "jim", "pass", true, new ArrayList<>()));
+                userService.saveUser(new User( "admin", "123", true, new ArrayList<>()));
+                userService.saveUser(new User( "agent", "123", true, new ArrayList<>()));
 
 
-            userService.addRole("john", "Role_Customer");
-            userService.addRole("smith", "Role_Agent");
-            userService.addRole("jim", "Role_Admin");
-            userService.addRole("jim", "Role_Agent");
-            userService.addRole("admin", "Role_Admin");
-            userService.addRole("admin", "Role_Customer");
-            userService.addRole("agent", "Role_Agent");
+                userService.addRole("john", "Role_Customer");
+                userService.addRole("smith", "Role_Agent");
+                userService.addRole("jim", "Role_Admin");
+                userService.addRole("jim", "Role_Agent");
+                userService.addRole("admin", "Role_Admin");
+                userService.addRole("admin", "Role_Customer");
+                userService.addRole("agent", "Role_Agent");
+            }
         };
     }
  }
