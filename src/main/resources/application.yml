@@ -6,7 +6,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/flightreservation
     username: root
-    password: Okbit#2020
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
 

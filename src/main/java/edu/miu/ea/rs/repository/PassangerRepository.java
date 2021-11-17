@@ -8,12 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.miu.ea.rs.model.Passenger;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 @Transactional
 public interface PassangerRepository extends JpaRepository<Passenger, Integer> {
-    @Query("select distinct p from Reservation r join r.passenger p join r.flightList")
-    List<Passenger> findEmail();
+    @Query("select distinct p from Reservation r join r.passenger p join r.flightList f")
+
+    List<Passenger> findEmail(java.sql.Date date);
 }

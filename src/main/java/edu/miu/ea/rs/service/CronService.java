@@ -8,6 +8,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,10 +25,11 @@ public class CronService {
 
     @Scheduled(cron="*/5 * * * * MON-FRI")
     public void publish (){
-        List<Passenger> passengers = passangerRepository.findEmail();
+        java.sql.Date date=new java.sql.Date(System.currentTimeMillis());
+        List<Passenger> passengers = passangerRepository.findEmail(date);
         passengers.stream()
                 .map(Passenger::getEmail)
-                .map(email -> new Email("lulitm5489@gmail.com", "","Your flight is in 24 hours"))
+                .map(email -> new Email(email, "Reminder for flight","Your flight is in 24 hours"))
                 .forEach(e -> kafkaTemplate.send(TOPIC, e));
 
         System.out.println("passenger======================="+passengers);

@@ -44,9 +44,5 @@ public class AirportServiceImp implements AirportService{
 		saveAirport(ap);
 		return airport;
 	}
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 4f84dc8a6abb1fee928a132544a87d2394adfae3
 }
