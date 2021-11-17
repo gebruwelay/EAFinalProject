@@ -10,6 +10,7 @@ import edu.miu.ea.rs.model.Role;
 import edu.miu.ea.rs.model.User;
 import edu.miu.ea.rs.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +34,10 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class UserController {
-
     private final UserService userService;
+
+    @Value("${app.security.secret:secret}")
+    private String secret;
 
     @GetMapping("/users")
     @PreAuthorize("hasAnyAuthority('Role_Admin')")
@@ -78,7 +81,7 @@ public class UserController {
         if (authorizationHeader.isPresent() && authorizationHeader.get().startsWith("Bearer ")) {
             try {
                 String refresh_token = authorizationHeader.get().substring("Bearer ".length());
-                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+                Algorithm algorithm = Algorithm.HMAC256(secret.getBytes());
                 JWTVerifier verifier = JWT.require(algorithm).build();
                 DecodedJWT decodeJWT = verifier.verify(refresh_token);
                 String username = decodeJWT.getSubject();
