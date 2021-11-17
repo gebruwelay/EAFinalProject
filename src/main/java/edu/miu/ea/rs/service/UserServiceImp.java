@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -48,6 +49,8 @@ public class UserServiceImp implements UserService, UserDetailsService {
     @Override
     public User saveUser(User user) {
         log.info("Saving user to database");
+        User oldUser = userRepository.findByUsername(user.getUsername());
+        if (oldUser != null) throw new RuntimeException("user exists");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
