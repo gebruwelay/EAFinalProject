@@ -1,8 +1,9 @@
 package edu.miu.ea.rs.configuration;
 
+import edu.miu.ea.rs.Filter.CustomAuthenticationFilter;
+import edu.miu.ea.rs.Filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
-import edu.miu.ea.rs.Filter.CustomeAuthenticationFilter;
-import edu.miu.ea.rs.Filter.CustomeAuthorizationFilter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,22 +23,14 @@ import static org.springframework.http.HttpMethod.GET;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public static final String[] PUBLIC_URLS={
-            "/api/login/**",
-            "/api/token/refresh/**",
-            "/v2/api-docs",
-            "/api/airports",
-            "/api/airlines",
-            "/api/airlines/{airportcode}",
-            "/api/reservations/byPassanger/{pid}",
-            "api/reservations/{reservationId}",
-            
+    @Value("${app.security.secret:secret}")
+    private String secret;
 
-    };
+    @Value("${app.security.public-urls}")
+    public String[] PUBLIC_URLS;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -46,21 +39,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        CustomeAuthenticationFilter customeAuthenticationFilter = new CustomeAuthenticationFilter(authenticationManagerBean());
-        customeAuthenticationFilter.setFilterProcessesUrl("/api/login");
-        http.csrf().disable();
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers(PUBLIC_URLS).permitAll();
-        http.authorizeRequests().antMatchers(GET,"/api/flights").permitAll();
-        http.authorizeRequests().anyRequest().authenticated();
-        http.addFilter(customeAuthenticationFilter);
-        http.addFilterBefore(new CustomeAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        // url based security configuration
+        http.csrf()
+                .disable()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests().antMatchers(PUBLIC_URLS).permitAll()
+                .and()
+                .authorizeRequests().antMatchers(GET, "/api/flights").permitAll()
+                .and().
+                authorizeRequests().anyRequest().authenticated();
+
+        // custom filter for handling authentication
+        CustomAuthenticationFilter authenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean(), secret);
+        authenticationFilter.setFilterProcessesUrl("/api/login");
+        http.addFilter(authenticationFilter);
+        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
-
     }
 }

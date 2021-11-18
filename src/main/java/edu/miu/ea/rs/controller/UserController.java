@@ -5,11 +5,12 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.miu.ea.rs.service.UserService;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import edu.miu.ea.rs.dto.RoleToUserForm;
 import edu.miu.ea.rs.model.Role;
 import edu.miu.ea.rs.model.User;
+import edu.miu.ea.rs.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
-import java.util.Date;
-import java.util.HashMap;
-
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -35,18 +32,17 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@EnableGlobalMethodSecurity(
-        prePostEnabled = true
-)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class UserController {
-
     private final UserService userService;
+
+    @Value("${app.security.secret:secret}")
+    private String secret;
 
     @GetMapping("/users")
     @PreAuthorize("hasAnyAuthority('Role_Admin')")
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
-
     }
 
     @PostMapping("/user/save")
@@ -54,7 +50,6 @@ public class UserController {
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
-
     }
 
     @PostMapping("/role/save")
@@ -62,35 +57,31 @@ public class UserController {
     public ResponseEntity<Role> saveRole(@RequestBody Role role) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveRole(role));
-
     }
 
     @PostMapping("/role/addToUser")
     @PreAuthorize("hasAnyAuthority('Role_Admin')")
     public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUserForm form) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
-        userService.addRole(form.getUsername(), form.getRolename());
+        userService.addRole(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
-
     }
 
     @DeleteMapping("/user/{id}")
     @PreAuthorize("hasAnyAuthority('Role_Admin')")
     public ResponseEntity<?> deleteUser(@PathVariable int id) {
-        User user = userService.deleteUser(id);
-        if (user != null) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        }
+        Optional<User> user = Optional.ofNullable(userService.deleteUser(id));
+        if (user.isPresent()) return new ResponseEntity<>(user, HttpStatus.OK);
         return new ResponseEntity<>("USER NOT FOUND", HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String authorizationHeader = request.getHeader(AUTHORIZATION);
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+        Optional<String> authorizationHeader = Optional.ofNullable(request.getHeader(AUTHORIZATION));
+        if (authorizationHeader.isPresent() && authorizationHeader.get().startsWith("Bearer ")) {
             try {
-                String refresh_token = authorizationHeader.substring("Bearer ".length());
-                Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+                String refresh_token = authorizationHeader.get().substring("Bearer ".length());
+                Algorithm algorithm = Algorithm.HMAC256(secret.getBytes());
                 JWTVerifier verifier = JWT.require(algorithm).build();
                 DecodedJWT decodeJWT = verifier.verify(refresh_token);
                 String username = decodeJWT.getSubject();
@@ -106,27 +97,16 @@ public class UserController {
                 tokens.put("refresh_token", refresh_token);
                 response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                 new ObjectMapper().writeValue(response.getOutputStream(), tokens);
-
             } catch (Exception exception) {
                 response.setHeader("Error", exception.getMessage());
                 response.setStatus(FORBIDDEN.value());
-                //response.sendError(FORBIDDEN.value());
                 Map<String, String> error = new HashMap<>();
                 error.put("error_message", exception.getMessage());
                 response.setContentType(MediaType.APPLICATION_JSON_VALUE);
                 new ObjectMapper().writeValue(response.getOutputStream(), error);
             }
-
         } else {
             throw new RuntimeException("Refresh token is missing");
         }
-
     }
-
-}
-
-@Data
-class RoleToUserForm {
-    private String username;
-    private String rolename;
 }

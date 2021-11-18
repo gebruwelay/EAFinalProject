@@ -37,7 +37,8 @@ public class FlightReservationApplication {
                 userService.saveUser(new User("smith", "pass", true, new ArrayList<>()));
                 userService.saveUser(new User( "jim", "pass", true, new ArrayList<>()));
                 userService.saveUser(new User( "admin", "123", true, new ArrayList<>()));
-                userService.saveUser(new User( "agent", "123", true, new ArrayList<>())); git
+                userService.saveUser(new User( "agent", "123", true, new ArrayList<>()));
+
 
                 userService.addRole("john", "Role_Customer");
                 userService.addRole("smith", "Role_Agent");

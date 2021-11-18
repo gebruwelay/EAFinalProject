@@ -1,21 +1,37 @@
 server:
   port: 8080
+
 spring:
   application:
     name: spring-boot-server
   datasource:
-    url: jdbc:mysql://localhost:3306/flightreservation
+    url: jdbc:mysql://${MYSQL_HOST}:3306/flightreservation
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
-      ddl-auto: update
+      ddl-auto: create-drop
     properties:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
+
+app:
+  kafka:
+    host:
+      ${KAFKA_HOST_PORT}
+  security:
+    secret: secret
+    public-urls: >
+      /api/login/**,
+      /api/token/refresh/**,
+      /v2/api-docs,
+      /api/airports,
+      /api/airlines,
+      /api/airlines/{airportcode},
+      /api/reservations/byPassanger/{pid},
+      /api/reservations/{reservationId}
