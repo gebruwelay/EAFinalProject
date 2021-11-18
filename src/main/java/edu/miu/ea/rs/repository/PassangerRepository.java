@@ -15,7 +15,6 @@ import java.util.List;
 @Repository
 @Transactional
 public interface PassangerRepository extends JpaRepository<Passenger, Integer> {
-    @Query("select distinct p from Reservation r join r.passenger p join r.flightList f")
-
+    @Query("select p from Reservation r join r.passenger p join r.flightList f where Date(f.departureTime)=:date")
     List<Passenger> findEmail(java.sql.Date date);
 }

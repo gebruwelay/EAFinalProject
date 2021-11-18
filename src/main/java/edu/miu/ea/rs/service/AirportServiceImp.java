@@ -37,11 +37,11 @@ public class AirportServiceImp implements AirportService{
 	@Override
 	public Airport updateAirport(int id, Airport airport) {
 		Optional<Airport> airport2 = oneAirport(id);
-		Airport ap = airport2.orElse(null);
-		ap.setAddress(airport.getAddress());
-		ap.setCode(airport.getCode());
-		ap.setName(airport.getName());
-		saveAirport(ap);
+		Airport existingAirport = airport2.orElse(null);
+		existingAirport.setAddress(airport.getAddress());
+		existingAirport.setCode(airport.getCode());
+		existingAirport.setName(airport.getName());
+		saveAirport(existingAirport);
 		return airport;
 	}
 

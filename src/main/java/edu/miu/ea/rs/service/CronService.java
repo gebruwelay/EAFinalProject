@@ -8,8 +8,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,7 +21,7 @@ public class CronService {
     private static final String TOPIC = "emailTopic3";
 
 
-    @Scheduled(cron="*/5 * * * * MON-FRI")
+    @Scheduled(cron="*/5 * * * * ?")
     public void publish (){
         java.sql.Date date=new java.sql.Date(System.currentTimeMillis());
         List<Passenger> passengers = passangerRepository.findEmail(date);

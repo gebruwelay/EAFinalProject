@@ -32,7 +32,6 @@ public class AirportController {
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public List<Airport> allAirports(){
-		System.out.println("here in the all airport get");
 		return airportService.allAirports();
 	}
 	
@@ -40,14 +39,14 @@ public class AirportController {
 	public Optional<Airport> oneAirport(@PathVariable int id){
 		return airportService.oneAirport(id);
 	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@PreAuthorize("hasAnyAuthority('Role_Admin')")
 	public ResponseEntity deleteAirport(@PathVariable int id){
 		airportService.deleteAirport(id);
 		return new ResponseEntity("it is deleted", HttpStatus.ACCEPTED);
 	}
-	
-	
+
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@PreAuthorize("hasAnyAuthority('Role_Admin')")
 	public Airport saveAirport(@RequestBody AirportDTO airportDTO) {

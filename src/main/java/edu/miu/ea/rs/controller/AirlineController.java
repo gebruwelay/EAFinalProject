@@ -30,7 +30,7 @@ public class AirlineController {
     @GetMapping("/{airportcode}")
     public ResponseEntity<?>  findByAiportCode(@PathVariable String airportcode) {
     	System.out.println("---- in findbyairport code"+airportcode);
-    	Airline airlines=airlineService.findByAirlineCode(airportcode);
+    	List<Airline> airlines=airlineService.findByAirportCode(airportcode);
         System.out.println("====> in findbyairport code"+airlines);
         if(airlines==null)
             return new ResponseEntity<>("airlines not found by the given airportcode",HttpStatus.NOT_FOUND);

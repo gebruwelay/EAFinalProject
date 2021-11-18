@@ -63,8 +63,8 @@ private AirportService airportService;
     }
 
     @Override
-    public List<Flight> searchFlightbyDepartureandDestination(LocalDateTime departureDate, String departureAirport, String arivalAirport) {
-        return repository.searchFlightbyDepartureandDestination(departureDate,departureAirport,arivalAirport);
+    public List<Flight> searchFlightbyDepartureandDestination(LocalDateTime departureDate, String departureAirport, String arrivalAirport) {
+        return repository.searchFlightbyDepartureandDestination(departureDate,departureAirport,arrivalAirport);
     }
 
     @Override
